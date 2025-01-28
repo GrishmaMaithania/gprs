@@ -2,20 +2,18 @@ const express = require('express');
 const bodyParser = require('body-parser');
 
 const app = express();
-const PORT = process.env.PORT || 3000; // Use Render's provided port
+const PORT = process.env.PORT || 3000;
 
-// Middleware to parse JSON
+// Middleware to parse JSON request body
 app.use(bodyParser.json());
-
-// Add a GET route for '/'
-app.get('/', (req, res) => {
-    res.send('Welcome to the GPRS Server!'); // Change this message if needed
-});
 
 // Endpoint to handle POST requests
 app.post('/api', (req, res) => {
-    const { message } = req.body;
-    console.log('Received message:', message);
+    // Log the message received from the Android app
+    const { message } = req.body;  // Extract the 'message' from the request body
+    console.log('Received message:', message);  // Log the message to the server console
+
+    // Respond back to the Android app
     res.status(200).json({ status: 'success', received: message });
 });
 
