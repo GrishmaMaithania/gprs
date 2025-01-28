@@ -2,7 +2,7 @@ services:
   - type: web
     name: my-service  # Change this to your preferred service name
     env: node         # Use 'python' for Python apps
-    buildCommand: "npm install"  # For Node.js, use 'npm install' or 'pip install' for Python
+    buildCommand: "npm install  && npm run build"  # For Node.js, use 'npm install' or 'pip install' for Python
     startCommand: "node server.js"  # Change this to your start command (e.g., 'node server.js')
     envVars:
       - key: NODE_ENV
