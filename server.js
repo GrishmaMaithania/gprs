@@ -16,6 +16,10 @@ app.post('/api', (req, res) => {
     // Respond back to the Android app
     res.status(200).json({ status: 'success', received: message });
 });
+app.get('/', (req, res) => {
+    res.send('Server is running!');
+});
+
 
 // Start the server
 app.listen(PORT, () => {
