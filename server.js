@@ -1,26 +1,16 @@
-const express = require("express");
+require('dotenv').config(); // Load environment variables from .env file
+const express = require('express');
 const app = express();
-const PORT = process.env.PORT || 3000;
+const PORT = process.env.PORT || 3000; // Use PORT from .env, fallback to 3000
 
 // Middleware to parse JSON
 app.use(express.json());
 
-// POST /api endpoint
-app.post("/api", (req, res) => {
-  const { message } = req.body; // Extracting the 'message' from the request body
-
-  // Log the received message on the server console
-  console.log("Message received on server:", message);
-
-  // Send a response back to the client
-  res.status(200).json({
-    status: "success",
-    receivedMessage: message,
-    response: "Message successfully received on the server!",
-  });
-});
+// Import and use the routes
+const apiRoutes = require('./routes/apiRoutes');
+app.use('/api', apiRoutes);
 
 // Start the server
 app.listen(PORT, () => {
-  console.log(`Server is running on port ${PORT}`);
+    console.log(`Server is running on port ${PORT}`);
 });
