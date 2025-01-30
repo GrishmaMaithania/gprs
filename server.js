@@ -9,6 +9,9 @@ app.use(express.json());
 // Import and use the routes
 const apiRoutes = require('./routes/apiRoutes');
 app.use('/api', apiRoutes);
+app.get('/', (req, res) => {
+  res.send('Welcome to the GPRS Server!'); // A simple response for testing
+});
 
 // Start the server
 app.listen(PORT, () => {
