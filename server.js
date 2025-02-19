@@ -1,11 +1,15 @@
 const express = require('express');
+const cors = require('cors');
 const app = express();
 const PORT = 3000;
 
-// Middleware to parse incoming JSON requests
+// Middleware to parse JSON
 app.use(express.json());
 
-// Handle POST requests to the root
+// Enable CORS for all origins
+app.use(cors());
+
+// Handle POST requests to '/'
 app.post('/', (req, res) => {
     const { message } = req.body;
     console.log('Message received on server:', message);
@@ -16,12 +20,12 @@ app.post('/', (req, res) => {
     });
 });
 
-// Handle GET requests to the root
+// Handle GET requests to '/'
 app.get('/', (req, res) => {
-    res.send('Welcome to the server! ');
+    res.send('Welcome to the server! Use POST / to send a message.');
 });
 
 // Start the server
 app.listen(PORT, () => {
-    console.log(`Server is running on Port:${PORT}`);
+    console.log(`Server is running on http://localhost:${PORT}`);
 });
