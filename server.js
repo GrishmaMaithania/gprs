@@ -1,13 +1,11 @@
 const express = require('express');
-const bodyParser = require('express'); // Middleware to parse JSON
-
 const app = express();
 const PORT = 3000;
 
-// Middleware to parse incoming requests as JSON
+// Middleware to parse incoming JSON requests
 app.use(express.json());
 
-// Handle POST requests
+// Handle POST requests to the root
 app.post('/', (req, res) => {
     const { message } = req.body;
     console.log('Message received on server:', message);
@@ -18,7 +16,12 @@ app.post('/', (req, res) => {
     });
 });
 
+// Handle GET requests to the root
+app.get('/', (req, res) => {
+    res.send('Welcome to the server! ');
+});
+
 // Start the server
 app.listen(PORT, () => {
-    console.log(`Server is running on http://localhost:${PORT}`);
+    console.log(`Server is running on Port:${PORT}`);
 });
