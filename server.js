@@ -1,17 +1,16 @@
+require('dotenv').config(); 
 const express = require('express');
-const cors = require('cors');
+const cors = require('cors'); 
 const app = express();
-const PORT = 3000;
+const PORT = process.env.PORT || 3000;
 
-// Middleware to parse JSON
+// Middleware to handle CORS and JSON parsing
+app.use(cors());
 app.use(express.json());
 
-// Enable CORS for all origins
-app.use(cors());
-
-// Handle POST requests to '/'
-app.post('/', (req, res) => {
-    const { message } = req.body;
+// POST route to handle message
+app.post('/api', (req, res) => {
+    const { message } = req.body; 
     console.log('Message received on server:', message);
     res.status(200).json({
         status: 'success',
@@ -20,12 +19,12 @@ app.post('/', (req, res) => {
     });
 });
 
-// Handle GET requests to '/'
+// GET route for the root URL
 app.get('/', (req, res) => {
-    res.send('Welcome to the server! Use POST / to send a message.');
+    res.send('Welcome to the GPRS Server!'); 
 });
 
 // Start the server
 app.listen(PORT, () => {
-    console.log(`Server is running on http://localhost:${PORT}`);
+    console.log(`Server is running on port ${PORT}`);
 });
